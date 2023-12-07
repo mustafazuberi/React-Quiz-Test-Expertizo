@@ -75,7 +75,7 @@ const ActiveQuestion = ({
         })}
       </section>
       {/* Correct / Incorrect status */}
-      <section className="flex flex-row justify-center gap-x-4">
+      <section className="flex flex-row justify-center gap-x-4 ">
         <section>
           {currentQuestion.selectedOption ===
             currentQuestion.correct_answer && (

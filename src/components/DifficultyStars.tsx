@@ -1,4 +1,4 @@
-import { FaStar } from "react-icons/fa";
+import { IoStarSharp } from "react-icons/io5";
 
 const difficultyLevels = Object.freeze({
   HARD: "hard",
@@ -15,8 +15,9 @@ const DifficultyStars = ({ difficulty }: { difficulty: String }) => {
         (difficulty === difficultyLevels.MEDIUM && i === starCount - 1) ||
         (difficulty === difficultyLevels.EASY && i >= starCount - 2);
 
-      stars.push(<FaStar key={i} color={isWhite ? "white" : "black"} />);
+      stars.push(<IoStarSharp key={i} color={isWhite ? "white" : "black"} />);
     }
+    
     return stars;
   };
   return (
