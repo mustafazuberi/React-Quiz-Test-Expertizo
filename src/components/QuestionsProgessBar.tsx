@@ -19,13 +19,17 @@ const QuestionsProgessBar = ({
       const percentage = ((currentQIndex + 1) / totalQuestions) * 100;
       return percentage.toFixed(2);
     }
+
     const percentage = calculatePercentage(currentQIndex, allQuestions.length);
-    setQuestionProgessBar(Number(percentage));
-  }, [currentQIndex]);
+    // Introduce a delay to trigger the transition
+    setTimeout(() => {
+      setQuestionProgessBar(Number(percentage));
+    }, 0);
+  }, [currentQIndex, allQuestions]);
 
   return (
     <div
-      className="bg-[#a9aaa9] h-[5vh]"
+      className="bg-[#a9aaa9] h-[5vh] transition-width duration-500"
       style={{ width: `${questionProgessbar}%` }}
     ></div>
   );

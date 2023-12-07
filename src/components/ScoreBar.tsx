@@ -1,5 +1,5 @@
 import { Question } from "@/types/types.quiz";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 type Props = {
   allQuestions: Question[];
@@ -20,11 +20,23 @@ const ScoreBar = ({
   maxmScore,
   originalScore,
 }: Props) => {
+  const [animatedWidth, setAnimatedWidth] = useState(originalScore);
+
   useEffect(() => {
     calculateOriginalScore();
     calculateAttemptQuestionsScore();
     calculateMaximumScore();
-  }, [allQuestions]);
+
+    // Update animatedWidth with a delay to trigger the transition
+    setTimeout(() => {
+      setAnimatedWidth(originalScore);
+    }, 0);
+  }, [allQuestions, originalScore]);
+
+  const calculateWidth = (score: number) => {
+    // Ensure the width is between 0 and 100
+    return Math.min(100, Math.max(0, score));
+  };
 
   return (
     <div>
@@ -35,15 +47,24 @@ const ScoreBar = ({
       <div className="w-full flex flex-row border border-black">
         <div
           className="bg-black h-6"
-          style={{ width: `${originalScore}%` }}
+          style={{
+            width: `${calculateWidth(animatedWidth)}%`,
+            transition: "width 0.5s",
+          }}
         ></div>
         <div
           className="bg-gray-600 h-6"
-          style={{ width: `${attemptQuestionsScore - originalScore}%` }}
+          style={{
+            width: `${calculateWidth(attemptQuestionsScore - animatedWidth)}%`,
+            transition: "width 0.5s",
+          }}
         ></div>
         <div
-          className={`bg-gray-400 h-6`}
-          style={{ width: `${maxmScore - attemptQuestionsScore}%` }}
+          className="bg-gray-400 h-6"
+          style={{
+            width: `${calculateWidth(maxmScore - attemptQuestionsScore)}%`,
+            transition: "width 0.5s",
+          }}
         ></div>
       </div>
     </div>
