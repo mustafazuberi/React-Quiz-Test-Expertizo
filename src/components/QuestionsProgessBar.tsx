@@ -15,9 +15,7 @@ const QuestionsProgessBar = ({ currentQIndex, allQuestions }: { currentQIndex: n
   }, [currentQIndex])
 
   return (
-    <div className="bg-gray-200 rounded-full dark:bg-gray-700 w-full">
-      <div className="bg-gray-600 text-xs font-medium text-blue-100 text-center h-6 leading-none" style={{ width: `${questionProgessbar}%` }}></div>
-    </div>
+    <div className="bg-[#a9aaa9] h-[5vh]" style={{ width: `${questionProgessbar}%` }}></div>
   )
 }
 

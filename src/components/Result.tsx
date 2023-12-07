@@ -1,7 +1,6 @@
 import { Result } from '@/types/types.question'
 
 const Result = ({ result, handleOnRestartQuiz }: { result: Result, handleOnRestartQuiz: () => void }) => {
-
   return (
     <section className='flex flex-col gap-y-2 justify-center items-center h-screen'>
       <section>

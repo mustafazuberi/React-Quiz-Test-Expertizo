@@ -24,47 +24,48 @@ const ActiveQuestion = ({ handleOnNext, currentQIndex, currentQuestion, handleOn
   let options = React.useMemo(() => shuffleArray([...currentQuestion.incorrect_answers, currentQuestion.correct_answer]), [currentQIndex])
 
   return (
-    <main className="px-6">
-      <section className='flex flex-col justify-start items-center gap-y-7'>
-        <section className="flex flex-col items-start sm:w-[550px] w-[90%]">
-          <section className="text-[30px] text-gray-600 min-w-full">Question {currentQIndex + 1} of 20</section>
-          <section>{currentQuestion.category}</section>
-          {/* Stars */}
-          {currentQuestion.difficulty === difficultyLevels.HARD ? <section className='flex flex-row gap-x-1'>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </section > : currentQuestion.difficulty === difficultyLevels.MEDIUM ? <section className='flex flex-row gap-x-1'>
-            <FaStar />
-            <FaStar />
-            <FaStar className='text-white' />
-          </section> : <section className='flex flex-row gap-x-1'>
-            <FaStar />
-            <FaStar className='text-white' />
-            <FaStar className='text-white' />
-          </section>
-          }
+    <section className='flex flex-col justify-start items-center gap-y-7 min-h-full px-6'>
+      <section className="flex flex-col items-start min-w-full">
+        <section className="text-[30px] text-gray-700 min-w-full">Question {currentQIndex + 1} of 20</section>
+        <section className="text-gray-500">Entertainment : {currentQuestion.category}</section>
+        {/* Stars */}
+        {currentQuestion.difficulty === difficultyLevels.HARD ? <section className='flex flex-row gap-x-1'>
+          <FaStar />
+          <FaStar />
+          <FaStar />
+        </section > : currentQuestion.difficulty === difficultyLevels.MEDIUM ? <section className='flex flex-row gap-x-1'>
+          <FaStar />
+          <FaStar />
+          <FaStar className='text-white' />
+        </section> : <section className='flex flex-row gap-x-1'>
+          <FaStar />
+          <FaStar className='text-white' />
+          <FaStar className='text-white' />
+        </section>
+        }
 
-        </section>
-        {/* Question */}
-        <section className="flex flex-col items-start sm:w-[550px] w-[90%]">
-          <h6 className="text-xl">Q : {currentQuestion.question}</h6>
-        </section>
+      </section>
+      {/* Question */}
+      <section className="flex flex-col items-start ">
+        <h6 className="text-xl">Q : {currentQuestion.question}</h6>
+      </section>
 
-        {/* Options */}
-        <section className='flex flex-row gap-3 sm:w-[550px] w-[90%] min-w-full flex-wrap'>
-          {options.map((option: String, i) => {
-            return <button disabled={!!currentQuestion.selectedOption} key={option.toString()} className={`p-2 w-[45%] border ${currentQuestion.selectedOption === option ? 'border-black text-white bg-black' : 'text-black bg-white'}`} onClick={() => handleOnOptionSelect({ option, qIndex: currentQIndex })}>{option}</button>
-          })}
-        </section>
-        {/* Correct / Incorrect status */}
+      {/* Options */}
+      <section className='flex flex-row gap-3 min-w-full flex-wrap'>
+        {options.map((option: String, i) => {
+          return <button disabled={!!currentQuestion.selectedOption} key={option.toString()} className={`p-2 w-[45%] border ${currentQuestion.selectedOption === option ? 'border-black text-white bg-black' : 'text-black bg-white'}`} onClick={() => handleOnOptionSelect({ option, qIndex: currentQIndex })}>{option}</button>
+        })}
+      </section>
+      {/* Correct / Incorrect status */}
+      <section className="flex flex-row justify-center gap-x-4">
         <section>
           {currentQuestion.selectedOption === currentQuestion.correct_answer && <h2 className="text-[30px] text-green-600">Correct!</h2>}
           {currentQuestion.selectedOption && currentQuestion.selectedOption !== currentQuestion.correct_answer && <h2 className="text-[30px] text-red-600">Wrong!</h2>}
         </section>
         {currentQuestion.selectedOption && <button className="p-3 bg-black text-white mb-3" onClick={() => handleOnNext()}>{allQuestions.length - 1 === currentQIndex ? 'Show Result' : 'Next Question'}</button>}
       </section>
-    </main>
+
+    </section>
   )
 }
 

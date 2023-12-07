@@ -20,10 +20,20 @@ const ScoreBar = ({ allQuestions, calculateOriginalScore, calculateAttemptQuesti
   }, [allQuestions])
 
   return (
-    <div className="bg-gray-200 dark:bg-gray-700 w-full flex flex-row">
-      <div className="bg-black flex items-center text-xs font-medium text-blue-100 text-center h-6 leading-none" style={{ width: `${originalScore}%` }}>{originalScore}%</div>
-      <div className="bg-gray-600 flex items-center text-xs font-medium text-blue-100 text-center h-6 leading-none" style={{ width: `${attemptQuestionsScore - originalScore}%` }}>{attemptQuestionsScore}%</div>
-      <div className="bg-gray-400 flex items-center text-xs font-medium text-blue-100 text-center h-6 leading-none" style={{ width: `${maxmScore - attemptQuestionsScore}%` }}>{maxmScore}%</div>
+    <div>
+      <div className='flex flex-row justify-between'>
+        <div className=''>
+          Score : {originalScore}%
+        </div>
+        <div>
+          Max Score : {maxmScore}%
+        </div>
+      </div>
+      <div className="w-full flex flex-row border-2 border-black rounded-xl">
+        <div className="bg-black h-6 rounded-l-xl" style={{ width: `${originalScore}%` }}></div>
+        <div className="bg-gray-600 h-6" style={{ width: `${attemptQuestionsScore - originalScore}%` }}></div>
+        <div className="bg-gray-400 h-6 rounded-r-xl" style={{ width: `${maxmScore - attemptQuestionsScore}%` }}></div>
+      </div>
     </div>
   )
 }
