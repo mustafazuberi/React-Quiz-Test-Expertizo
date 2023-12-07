@@ -1,28 +1,50 @@
-"use client"
-import { useMemo } from 'react'
-import { Question } from "@/types/types.question";
+"use client";
+import { useMemo } from "react";
+import { Question } from "@/types/types.quiz";
 import useQuiz from "@/hooks/useQuiz";
-import DifficultyStars from './DifficultyStars';
+import DifficultyStars from "./DifficultyStars";
 
 type Props = {
   allQuestions: Question[];
-  handleOnOptionSelect: ({ option, qIndex }: { option: String, qIndex: number }) => void;
+  handleOnOptionSelect: ({
+    option,
+    qIndex,
+  }: {
+    option: String;
+    qIndex: number;
+  }) => void;
   currentQuestion: Question;
   handleOnNext: () => void;
   currentQIndex: number;
-}
+};
 
-
-const ActiveQuestion = ({ handleOnNext, currentQIndex, currentQuestion, handleOnOptionSelect, allQuestions }: Props) => {
-  const { shuffleArray } = useQuiz()
+const ActiveQuestion = ({
+  handleOnNext,
+  currentQIndex,
+  currentQuestion,
+  handleOnOptionSelect,
+  allQuestions,
+}: Props) => {
+  const { shuffleArray } = useQuiz();
   // Adding it in use Memo because it rerenders and shuffled again  on component rerender!
-  let options = useMemo(() => shuffleArray([...currentQuestion.incorrect_answers, currentQuestion.correct_answer]), [currentQIndex])
+  let options = useMemo(
+    () =>
+      shuffleArray([
+        ...currentQuestion.incorrect_answers,
+        currentQuestion.correct_answer,
+      ]),
+    [currentQIndex]
+  );
 
   return (
-    <section className='flex flex-col justify-start items-center gap-y-7 min-h-full px-6'>
+    <section className="flex flex-col justify-start items-center gap-y-7 min-h-full px-6">
       <section className="flex flex-col items-start min-w-full">
-        <section className="text-[30px] text-gray-700 min-w-full">Question {currentQIndex + 1} of 20</section>
-        <section className="text-gray-500">Entertainment : {currentQuestion.category}</section>
+        <section className="text-[30px] text-gray-700 min-w-full">
+          Question {currentQIndex + 1} of 20
+        </section>
+        <section className="text-gray-500">
+          Entertainment : {currentQuestion.category}
+        </section>
         {/* Difficulty level stars */}
         <DifficultyStars difficulty={currentQuestion.difficulty} />
       </section>
@@ -32,22 +54,52 @@ const ActiveQuestion = ({ handleOnNext, currentQIndex, currentQuestion, handleOn
       </section>
 
       {/* Options */}
-      <section className='flex flex-row gap-3 min-w-full flex-wrap'>
+      <section className="flex flex-row gap-3 min-w-full flex-wrap">
         {options.map((option: String, i) => {
-          return <button disabled={!!currentQuestion.selectedOption} key={option.toString()} className={`p-2 w-[45%] border ${currentQuestion.selectedOption === option ? 'border-black text-white bg-black' : 'text-black bg-white'}`} onClick={() => handleOnOptionSelect({ option, qIndex: currentQIndex })}>{option}</button>
+          return (
+            <button
+              disabled={!!currentQuestion.selectedOption}
+              key={option.toString()}
+              className={`p-2 w-[45%] border ${
+                currentQuestion.selectedOption === option
+                  ? "border-black text-white bg-black"
+                  : "text-black bg-white"
+              }`}
+              onClick={() =>
+                handleOnOptionSelect({ option, qIndex: currentQIndex })
+              }
+            >
+              {option}
+            </button>
+          );
         })}
       </section>
       {/* Correct / Incorrect status */}
       <section className="flex flex-row justify-center gap-x-4">
         <section>
-          {currentQuestion.selectedOption === currentQuestion.correct_answer && <h2 className="text-[30px] text-green-600">Correct!</h2>}
-          {currentQuestion.selectedOption && currentQuestion.selectedOption !== currentQuestion.correct_answer && <h2 className="text-[30px] text-red-600">Wrong!</h2>}
+          {currentQuestion.selectedOption ===
+            currentQuestion.correct_answer && (
+            <h2 className="text-[30px] text-green-600">Correct!</h2>
+          )}
+          {currentQuestion.selectedOption &&
+            currentQuestion.selectedOption !==
+              currentQuestion.correct_answer && (
+              <h2 className="text-[30px] text-red-600">Sorry!</h2>
+            )}
         </section>
-        {currentQuestion.selectedOption && <button className="p-3 bg-black text-white mb-3" onClick={() => handleOnNext()}>{allQuestions.length - 1 === currentQIndex ? 'Show Result' : 'Next Question'}</button>}
+        {currentQuestion.selectedOption && (
+          <button
+            className="p-3 bg-black text-white mb-3"
+            onClick={() => handleOnNext()}
+          >
+            {allQuestions.length - 1 === currentQIndex
+              ? "Show Result"
+              : "Next Question"}
+          </button>
+        )}
       </section>
-
     </section>
-  )
-}
+  );
+};
 
-export default ActiveQuestion
+export default ActiveQuestion;

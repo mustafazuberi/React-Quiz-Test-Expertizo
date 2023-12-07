@@ -1,4 +1,4 @@
-import { Result } from '@/types/types.question'
+import { Result } from '@/types/types.quiz'
 
 const Result = ({ result, handleOnRestartQuiz }: { result: Result, handleOnRestartQuiz: () => void }) => {
   return (
