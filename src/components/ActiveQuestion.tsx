@@ -1,8 +1,8 @@
 "use client"
-import { FaStar } from "react-icons/fa";
-import React from 'react'
+import { useMemo } from 'react'
 import { Question } from "@/types/types.question";
 import useQuiz from "@/hooks/useQuiz";
+import DifficultyStars from './DifficultyStars';
 
 type Props = {
   allQuestions: Question[];
@@ -12,38 +12,19 @@ type Props = {
   currentQIndex: number;
 }
 
-const difficultyLevels = {
-  HARD: 'hard',
-  MEDIUM: 'medium',
-  EASY: 'easy'
-}
 
 const ActiveQuestion = ({ handleOnNext, currentQIndex, currentQuestion, handleOnOptionSelect, allQuestions }: Props) => {
   const { shuffleArray } = useQuiz()
   // Adding it in use Memo because it rerenders and shuffled again  on component rerender!
-  let options = React.useMemo(() => shuffleArray([...currentQuestion.incorrect_answers, currentQuestion.correct_answer]), [currentQIndex])
+  let options = useMemo(() => shuffleArray([...currentQuestion.incorrect_answers, currentQuestion.correct_answer]), [currentQIndex])
 
   return (
     <section className='flex flex-col justify-start items-center gap-y-7 min-h-full px-6'>
       <section className="flex flex-col items-start min-w-full">
         <section className="text-[30px] text-gray-700 min-w-full">Question {currentQIndex + 1} of 20</section>
         <section className="text-gray-500">Entertainment : {currentQuestion.category}</section>
-        {/* Stars */}
-        {currentQuestion.difficulty === difficultyLevels.HARD ? <section className='flex flex-row gap-x-1'>
-          <FaStar />
-          <FaStar />
-          <FaStar />
-        </section > : currentQuestion.difficulty === difficultyLevels.MEDIUM ? <section className='flex flex-row gap-x-1'>
-          <FaStar />
-          <FaStar />
-          <FaStar className='text-white' />
-        </section> : <section className='flex flex-row gap-x-1'>
-          <FaStar />
-          <FaStar className='text-white' />
-          <FaStar className='text-white' />
-        </section>
-        }
-
+        {/* Difficulty level stars */}
+        <DifficultyStars difficulty={currentQuestion.difficulty} />
       </section>
       {/* Question */}
       <section className="flex flex-col items-start ">

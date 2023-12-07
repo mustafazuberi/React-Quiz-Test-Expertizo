@@ -48,7 +48,7 @@ const useQuiz = () => {
   const calculateOriginalScore = () => {
     const correctAnswers = allQuestions.filter((q) => q.correct_answer === q.selectedOption)
     const percent = (correctAnswers.length / allQuestions.length) * 100;
-    setOriginalScore(Number(percent.toFixed(2)))
+    setOriginalScore(Math.round(percent))
   }
 
   const calculateAttemptQuestionsScore = () => {
@@ -56,7 +56,7 @@ const useQuiz = () => {
     const attemptQuestions = allQuestions.filter((q) => !!q.selectedOption)
     if (!attemptQuestions.length) return
     const percent = (correctAnswers.length / attemptQuestions.length) * 100;
-    setAttemptQuestionsScore(Number(percent.toFixed(2)))
+    setAttemptQuestionsScore(Math.round(percent))
   }
 
 
@@ -65,7 +65,7 @@ const useQuiz = () => {
     const correctOutOfAttempt = attemptQuestions.filter((q) => q.correct_answer === q.selectedOption)
     const unAttemptQuestionsLength = allQuestions.length - attemptQuestions.length
     const percent = ((correctOutOfAttempt.length + unAttemptQuestionsLength) / allQuestions.length) * 100;
-    setMaxmScore(Number(percent.toFixed(2)))
+    setMaxmScore(Math.round(percent))
   }
 
   function shuffleArray(originalArray: String[]) {
@@ -86,6 +86,9 @@ const useQuiz = () => {
     setAllQuestions([...unselectedOptionsArray])
     setResult(null)
     setCurrentQuestion(unselectedOptionsArray[0])
+    setMaxmScore(0)
+    setOriginalScore(0)
+    setAttemptQuestionsScore(0)
   }
 
 

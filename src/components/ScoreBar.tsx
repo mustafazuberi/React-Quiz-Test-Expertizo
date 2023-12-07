@@ -29,10 +29,10 @@ const ScoreBar = ({ allQuestions, calculateOriginalScore, calculateAttemptQuesti
           Max Score : {maxmScore}%
         </div>
       </div>
-      <div className="w-full flex flex-row border-2 border-black rounded-xl">
-        <div className="bg-black h-6 rounded-l-xl" style={{ width: `${originalScore}%` }}></div>
+      <div className="w-full flex flex-row border border-black">
+        <div className="bg-black h-6" style={{ width: `${originalScore}%` }}></div>
         <div className="bg-gray-600 h-6" style={{ width: `${attemptQuestionsScore - originalScore}%` }}></div>
-        <div className="bg-gray-400 h-6 rounded-r-xl" style={{ width: `${maxmScore - attemptQuestionsScore}%` }}></div>
+        <div className={`bg-gray-400 h-6`} style={{ width: `${maxmScore - attemptQuestionsScore}%` }}></div>
       </div>
     </div>
   )
