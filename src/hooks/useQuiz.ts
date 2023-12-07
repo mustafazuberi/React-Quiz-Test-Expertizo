@@ -1,6 +1,7 @@
 import { Grade, Question, Result, Status } from "@/types/types.question"
 import { questionsJson } from '@/questions'
 import React from "react";
+import { useRouter } from "next/router";
 
 const useQuiz = () => {
   const [allQuestions, setAllQuestions] = React.useState<Question[]>([...questionsJson])
@@ -53,9 +54,6 @@ const useQuiz = () => {
     return mergedArray;
   }
 
-  const handleOnRestartQuiz = () => {
-
-  }
 
   const calculateOriginalScore = () => {
     const correctAnswers = allQuestions.filter((q) => q.correct_answer === q.selectedOption)
@@ -80,7 +78,7 @@ const useQuiz = () => {
     setMaxmScore(Number(percent.toFixed(2)))
   }
 
-  return { allQuestions, currentQuestion, addStringToRandomIndex, handleOnOptionSelect, currentQIndex, handleOnNext, handleOnRestartQuiz, calculateOriginalScore, calculateMaximumScore, calculateAttemptQuestionsScore, originalScore, maxmScore, attemptQuestionsScore, result }
+  return { allQuestions, currentQuestion, addStringToRandomIndex, handleOnOptionSelect, currentQIndex, handleOnNext, calculateOriginalScore, calculateMaximumScore, calculateAttemptQuestionsScore, originalScore, maxmScore, attemptQuestionsScore, result }
 }
 
 export default useQuiz
