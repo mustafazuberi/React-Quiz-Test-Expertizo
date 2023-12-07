@@ -1,7 +1,6 @@
 import { Grade, Question, Result, Status } from "@/types/types.question"
 import { questionsJson } from '@/questions'
 import React from "react";
-import { useRouter } from "next/router";
 
 const useQuiz = () => {
   const [allQuestions, setAllQuestions] = React.useState<Question[]>([...questionsJson])
@@ -45,15 +44,6 @@ const useQuiz = () => {
     setResult({ grade, status, score: originalScore })
   }
 
-  const addStringToRandomIndex = (incorrect_answers: String[], correct_answer: String) => {
-    const mergedArray = [...incorrect_answers];
-    // Get a random index within the merged array length
-    const randomIndex = Math.floor(Math.random() * (mergedArray.length + 1));
-    // Insert the correctAnswer at the random index
-    mergedArray.splice(randomIndex, 0, correct_answer);
-    return mergedArray;
-  }
-
 
   const calculateOriginalScore = () => {
     const correctAnswers = allQuestions.filter((q) => q.correct_answer === q.selectedOption)
@@ -78,7 +68,28 @@ const useQuiz = () => {
     setMaxmScore(Number(percent.toFixed(2)))
   }
 
-  return { allQuestions, currentQuestion, addStringToRandomIndex, handleOnOptionSelect, currentQIndex, handleOnNext, calculateOriginalScore, calculateMaximumScore, calculateAttemptQuestionsScore, originalScore, maxmScore, attemptQuestionsScore, result }
+  function shuffleArray(originalArray: String[]) {
+    const shuffledArray = [...originalArray];
+    // Fisher-Yates (Knuth) Shuffle Algorithm
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+
+    return shuffledArray;
+  }
+
+
+  const handleOnRestartQuiz = () => {
+    setCurrentQIndex(0)
+    const unselectedOptionsArray = allQuestions.map((q) => ({ ...q, selectedOption: null }))
+    setAllQuestions([...unselectedOptionsArray])
+    setResult(null)
+    setCurrentQuestion(unselectedOptionsArray[0])
+  }
+
+
+  return { allQuestions, currentQuestion, handleOnOptionSelect, currentQIndex, handleOnNext, calculateOriginalScore, calculateMaximumScore, calculateAttemptQuestionsScore, originalScore, maxmScore, attemptQuestionsScore, result, shuffleArray, handleOnRestartQuiz }
 }
 
 export default useQuiz

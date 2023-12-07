@@ -13,10 +13,6 @@ type Props = {
 
 const ScoreBar = ({ allQuestions, calculateOriginalScore, calculateAttemptQuestionsScore, calculateMaximumScore, attemptQuestionsScore, maxmScore, originalScore }: Props) => {
 
-  console.log('attemptQuestionsScore:', attemptQuestionsScore)
-  console.log('originalScore:', originalScore)
-  console.log('maxmScore:', maxmScore)
-
   useEffect(() => {
     calculateOriginalScore()
     calculateAttemptQuestionsScore()

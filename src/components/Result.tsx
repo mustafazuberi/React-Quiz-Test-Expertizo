@@ -1,10 +1,11 @@
 import { Result } from '@/types/types.question'
 
-const Result = ({ result }: { result: Result }) => {
+const Result = ({ result, handleOnRestartQuiz }: { result: Result, handleOnRestartQuiz: () => void }) => {
+
   return (
     <section className='flex flex-col gap-y-2 justify-center items-center h-screen'>
       <section>
-        <button className="bg-black text-white text-[20px] p-4" onClick={() => window.location.reload()}>Restart Quiz</button>
+        <button className="bg-black text-white text-[20px] p-4" onClick={() => handleOnRestartQuiz()}>Restart Quiz</button>
       </section>
       <section>
         You Scored {result?.score}%.
