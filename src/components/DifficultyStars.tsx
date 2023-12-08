@@ -15,7 +15,7 @@ const DifficultyStars = ({ difficulty }: { difficulty: String }) => {
         (difficulty === difficultyLevels.MEDIUM && i === starCount - 1) ||
         (difficulty === difficultyLevels.EASY && i >= starCount - 2);
       stars.push(
-        <IoStarSharp key={i} className={isWhite ? "text-gray-400" : "text-black"} />
+        <IoStarSharp key={i} className={isWhite ? "text-gray-200" : "text-black"} />
       );
     }
 

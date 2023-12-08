@@ -50,20 +50,20 @@ const ActiveQuestion = ({
       </section>
       {/* Question */}
       <section className="flex flex-col items-start justify-start ">
-        <h6 className="text-[14px] font-bold">{currentQuestion.question}</h6>
+        <h6 className="text-[16px] font-bold">{currentQuestion.question}</h6>
       </section>
 
       {/* Options */}
-      <section className="flex flex-row gap-3 min-w-full justify-around flex-wrap">
+      <section className="flex flex-row gap-6 min-w-full justify-around flex-wrap">
         {options.map((option: String, i) => {
           return (
             <button
               disabled={!!currentQuestion.selectedOption}
               key={option.toString()}
-              className={`p-1 sm:w-[35%] border text-[13px] rounded-md ${
+              className={`p-1.5 sm:w-[35%] border font-bold text-[13px] rounded-md ${
                 currentQuestion.selectedOption === option
                   ? "border-gray-700 text-white bg-black"
-                  : "bg-white text-gray-500"
+                  : "bg-gray-200 border-2 border-black text-black "
               }`}
               onClick={() =>
                 handleOnOptionSelect({ option, qIndex: currentQIndex })
@@ -76,7 +76,7 @@ const ActiveQuestion = ({
       </section>
       {/* Correct / Incorrect status */}
       <section
-        className={`flex flex-col justify-center gap-x-4 items-center h-[15vh]`}
+        className={`flex flex-col justify-center gap-y-4 items-center h-[15vh]`}
       >
         <section>
           {currentQuestion.selectedOption ===
@@ -92,7 +92,7 @@ const ActiveQuestion = ({
         <section>
           {currentQuestion.selectedOption && (
             <button
-              className="p-1 px-4 rounded-md bg-gray-200 text-black border-2 border-gray-700 mb-3 text-[13px]"
+              className="p-1 px-4 rounded-md bg-gray-200 text-black border-2 border-black text-[13px]"
               onClick={() => handleOnNext()}
             >
               {allQuestions.length - 1 === currentQIndex
