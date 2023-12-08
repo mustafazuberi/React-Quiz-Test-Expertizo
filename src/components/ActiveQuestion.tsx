@@ -37,33 +37,33 @@ const ActiveQuestion = ({
   );
 
   return (
-    <section className="flex flex-col justify-start items-center gap-y-7 min-h-full px-6">
+    <section className="flex flex-col justify-center gap-y-7 min-h-full px-6">
       <section className="flex flex-col items-start min-w-full">
-        <section className="text-[30px] text-gray-700 min-w-full">
+        <section className="text-[28px] text-gray-700 min-w-full">
           Question {currentQIndex + 1} of 20
         </section>
-        <section className="text-gray-500">
+        <section className="text-gray-500 text-[12px]">
           Entertainment : {currentQuestion.category}
         </section>
         {/* Difficulty level stars */}
         <DifficultyStars difficulty={currentQuestion.difficulty} />
       </section>
       {/* Question */}
-      <section className="flex flex-col items-start ">
-        <h6 className="text-xl">Q : {currentQuestion.question}</h6>
+      <section className="flex flex-col items-start justify-start ">
+        <h6 className="text-[14px] font-bold">{currentQuestion.question}</h6>
       </section>
 
       {/* Options */}
-      <section className="flex flex-row gap-3 min-w-full flex-wrap">
+      <section className="flex flex-row gap-3 min-w-full justify-around flex-wrap">
         {options.map((option: String, i) => {
           return (
             <button
               disabled={!!currentQuestion.selectedOption}
               key={option.toString()}
-              className={`p-2 w-[45%] border ${
+              className={`p-1 sm:w-[35%] border text-[13px] rounded-md ${
                 currentQuestion.selectedOption === option
-                  ? "border-black text-white bg-black"
-                  : "text-black bg-white"
+                  ? "border-gray-700 text-white bg-black"
+                  : "bg-white text-gray-500"
               }`}
               onClick={() =>
                 handleOnOptionSelect({ option, qIndex: currentQIndex })
@@ -75,7 +75,9 @@ const ActiveQuestion = ({
         })}
       </section>
       {/* Correct / Incorrect status */}
-      <section className="flex flex-row justify-center gap-x-4 ">
+      <section
+        className={`flex flex-col justify-center gap-x-4 items-center h-[15vh]`}
+      >
         <section>
           {currentQuestion.selectedOption ===
             currentQuestion.correct_answer && (
@@ -87,16 +89,18 @@ const ActiveQuestion = ({
               <h2 className="text-[30px] text-red-600">Sorry!</h2>
             )}
         </section>
-        {currentQuestion.selectedOption && (
-          <button
-            className="p-3 bg-black text-white mb-3"
-            onClick={() => handleOnNext()}
-          >
-            {allQuestions.length - 1 === currentQIndex
-              ? "Show Result"
-              : "Next Question"}
-          </button>
-        )}
+        <section>
+          {currentQuestion.selectedOption && (
+            <button
+              className="p-1 px-4 rounded-md bg-gray-200 text-black border-2 border-gray-700 mb-3 text-[13px]"
+              onClick={() => handleOnNext()}
+            >
+              {allQuestions.length - 1 === currentQIndex
+                ? "Show Result"
+                : "Next Question"}
+            </button>
+          )}
+        </section>
       </section>
     </section>
   );

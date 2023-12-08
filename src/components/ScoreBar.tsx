@@ -41,31 +41,31 @@ const ScoreBar = ({
   return (
     <div>
       <div className="flex flex-row justify-between">
-        <div className="">Score : {originalScore}%</div>
-        <div>Max Score : {maxmScore}%</div>
+        <div className="text-[14px]">Score : {originalScore}%</div>
+        <div className="text-[14px]">Max Score : {maxmScore}%</div>
       </div>
-      <div className="w-full flex flex-row border border-black">
-        <div
-          className="bg-black h-6"
+      <div className="w-full flex flex-row border-2 border-gray-600 rounded-[5px] mt-1">
+        <span
+          className="bg-black h-7"
           style={{
             width: `${calculateWidth(animatedWidth)}%`,
             transition: "width 0.5s",
           }}
-        ></div>
-        <div
-          className="bg-gray-600 h-6"
+        ></span>
+        <span
+          className="bg-gray-500 h-7"
           style={{
             width: `${calculateWidth(attemptQuestionsScore - animatedWidth)}%`,
             transition: "width 0.5s",
           }}
-        ></div>
-        <div
-          className="bg-gray-400 h-6"
+        ></span>
+        <span
+          className="bg-gray-400 h-7"
           style={{
             width: `${calculateWidth(maxmScore - attemptQuestionsScore)}%`,
             transition: "width 0.5s",
           }}
-        ></div>
+        ></span>
       </div>
     </div>
   );

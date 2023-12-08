@@ -6,5 +6,5 @@ export default function Home() {
     <main className="min-h-screen max-h-screen p-0">
       <Quiz />
     </main>
-  )
+  );
 }

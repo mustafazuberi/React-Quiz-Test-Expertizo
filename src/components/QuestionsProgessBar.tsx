@@ -29,7 +29,7 @@ const QuestionsProgessBar = ({
 
   return (
     <div
-      className="bg-[#a9aaa9] h-[5vh] transition-width duration-500"
+      className="bg-[#a9aaa9] h-[4vh] transition-width duration-500"
       style={{ width: `${questionProgessbar}%` }}
     ></div>
   );
