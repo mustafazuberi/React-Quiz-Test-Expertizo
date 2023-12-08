@@ -1,5 +1,5 @@
 import { Grade, Question, Result, Status } from "@/types/types.quiz";
-import { questionsJson } from "@/questions";
+import questionsJson from "@/data/questions.json";
 import { useState } from "react";
 
 const getdecodedQuestions = () => {
