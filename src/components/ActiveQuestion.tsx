@@ -60,7 +60,7 @@ const ActiveQuestion = ({
             <button
               disabled={!!currentQuestion.selectedOption}
               key={option.toString()}
-              className={`p-1.5 sm:w-[35%] border font-bold text-[13px] rounded-md ${
+              className={`p-1.5 sm:w-[35%] w-full border font-bold text-[13px] rounded-md ${
                 currentQuestion.selectedOption === option
                   ? "border-gray-700 text-white bg-black"
                   : "bg-gray-200 border-2 border-black text-black "

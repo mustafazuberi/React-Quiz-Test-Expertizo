@@ -42,8 +42,8 @@ export default function Questions() {
           allQuestions={allQuestions}
         />
       </section>
-      <section className="w-full flex justify-center">
-        <section className="h-[75vh] sm:w-[70%] w-full mt-2">
+      <section className="w-full flex flex-col flex-1 h-[90vh] justify-between p-4 items-center">
+        <section className="sm:w-[70%] sm:max-w-[700px] w-full mt-2">
           <ActiveQuestion
             handleOnNext={handleOnNext}
             currentQIndex={currentQIndex}
@@ -52,9 +52,7 @@ export default function Questions() {
             handleOnOptionSelect={handleOnOptionSelect}
           />
         </section>
-      </section>
-      <section className="w-full flex h-[20vh] justify-center items-center">
-        <section className="sm:w-[70%] w-full">
+        <section className="sm:w-[70%] sm:max-w-[700px] w-full">
           <ScoreBar
             allQuestions={allQuestions}
             originalScore={originalScore}
